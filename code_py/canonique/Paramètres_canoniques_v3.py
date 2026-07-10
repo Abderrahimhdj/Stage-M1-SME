@@ -13,7 +13,7 @@ CD_END = ']]>'
 # Exercice 1 : on donne a et b, on demande K et tau
 # a*dy/dt + b*y = u  ->  K = 1/b, tau = a/b
 # ============================================================
-for i in range(10):
+for i in range(1):
     a = random.randint(1, 10)
     b = random.randint(1, 10)
 

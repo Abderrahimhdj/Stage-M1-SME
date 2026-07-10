@@ -12,7 +12,7 @@ total = 0
 # ============================================================
 
 # Ordre 1 : dy/dt + ay = eu  ->  H(p) = e/(p+a)
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     e = random.randint(1, 10)
     while e == a:
@@ -43,7 +43,7 @@ for i in range(5):
     total += 1
 
 # Ordre 2 : d²y/dt² + a dy/dt + by = d_coef*du/dt + eu  ->  H(p) = (d_coef*p+e)/(p²+ap+b)
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     b = random.randint(2, 10)
     d_coef = random.randint(1, 10)
@@ -74,7 +74,7 @@ for i in range(5):
     total += 1
 
 # Ordre 3 : H(p) = (f_coef*p²+d_coef*p+e)/(p³+ap²+bp+c)
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     b = random.randint(2, 10)
     c = random.randint(2, 10)
@@ -107,7 +107,7 @@ for i in range(5):
     total += 1
 
 # Ordre 4 : H(p) = (g_coef*p³+f_coef*p²+d_coef*p+e)/(p⁴+ap³+bp²+cp+d)
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     b = random.randint(2, 10)
     c = random.randint(2, 10)
@@ -146,7 +146,7 @@ for i in range(5):
 # ============================================================
 
 # Ordre 1 inverse : H(p) = e/(p+a)  ->  dy/dt + ay = eu
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     e = random.randint(1, 10)
     while e == a:
@@ -177,7 +177,7 @@ for i in range(5):
     total += 1
 
 # Ordre 2 inverse : H(p) = (d_coef*p+e)/(p²+ap+b)  ->  d²y/dt² + ady/dt + by = d_coef*du/dt + eu
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     b = random.randint(2, 10)
     d_coef = random.randint(1, 10)
@@ -208,7 +208,7 @@ for i in range(5):
     total += 1
 
 # Ordre 3 inverse : H(p) = (f_coef*p²+d_coef*p+e)/(p³+ap²+bp+c)
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     b = random.randint(2, 10)
     c = random.randint(2, 10)
@@ -241,7 +241,7 @@ for i in range(5):
     total += 1
 
 # Ordre 4 inverse : H(p) = (g_coef*p³+f_coef*p²+d_coef*p+e)/(p⁴+ap³+bp²+cp+d)
-for i in range(5):
+for i in range(1):
     a = random.randint(2, 10)
     b = random.randint(2, 10)
     c = random.randint(2, 10)

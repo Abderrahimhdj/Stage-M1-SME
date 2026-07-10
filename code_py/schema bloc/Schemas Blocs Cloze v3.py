@@ -19,7 +19,7 @@ total = 0
 # Ordre 1 : H(p) = (a*p + b) / (c*p + d)
 # FBF = (a*p + b) / ((c+a)*p + (d+b))
 # ============================================================
-for i in range(5):
+for i in range(1):
     a = random.randint(1, 10)
     b = random.randint(1, 10)
     c = random.randint(1, 10)
@@ -49,7 +49,7 @@ for i in range(5):
 # Ordre 2 : H(p) = (a*p² + b*p + c) / (d*p² + e*p + f)
 # FBF = (a*p² + b*p + c) / ((d+a)*p² + (e+b)*p + (f+c))
 # ============================================================
-for i in range(5):
+for i in range(1):
     a = random.randint(1, 10)
     b = random.randint(1, 10)
     c = random.randint(1, 10)
@@ -82,7 +82,7 @@ for i in range(5):
 # Ordre 3 : H(p) = (a*p³ + b*p² + c*p + d) / (e*p³ + f*p² + g*p + h)
 # FBF = (a*p³+b*p²+c*p+d) / ((e+a)*p³+(f+b)*p²+(g+c)*p+(h+d))
 # ============================================================
-for i in range(5):
+for i in range(1):
     a = random.randint(1, 10)
     b = random.randint(1, 10)
     c = random.randint(1, 10)
