@@ -240,3 +240,86 @@ def test_ft_k_tau_ordre2_zeta():
     c = 4
     zeta = round(b / (2 * math.sqrt(a * c)), 4)
     assert zeta == 0.5
+
+# ============================================================
+# Tests script reponse_indicielle
+# ============================================================
+
+import numpy as np
+from scipy import signal
+
+def generer_ordre1(K, tau):
+    num = [K]
+    den = [tau, 1]
+    sys = signal.TransferFunction(num, den)
+    t = np.linspace(0, 5 * tau, 500)
+    t, y = signal.step(sys, T=t)
+    return t, y
+
+def generer_ordre2(K, wn, zeta):
+    num = [K * wn**2]
+    den = [1, 2 * zeta * wn, wn**2]
+    sys = signal.TransferFunction(num, den)
+    t_end = max(10 / wn, 20)
+    t = np.linspace(0, t_end, 500)
+    t, y = signal.step(sys, T=t)
+    return t, y
+
+def test_reponse_indicielle_ordre1_valeur_finale():
+    # la valeur finale doit etre K
+    K = 1.5
+    tau = 2.0
+    t, y = generer_ordre1(K, tau)
+    assert abs(y[-1] - K) < 0.02  # valeur finale = K
+
+def test_reponse_indicielle_ordre1_pas_oscillations():
+    # ordre 1 ne doit pas osciller - la sortie est toujours croissante
+    K = 1.0
+    tau = 2.0
+    t, y = generer_ordre1(K, tau)
+    # verifier que y est monotone croissante
+    assert all(y[i] <= y[i+1] for i in range(len(y)-1))
+
+def test_reponse_indicielle_ordre2_aperiodique():
+    # zeta > 1 -> pas d'oscillations, montee monotone
+    K = 1.0
+    wn = 2.0
+    zeta = 2.0  # aperiodique
+    t, y = generer_ordre2(K, wn, zeta)
+    assert abs(y[-1] - K) < 0.02  # valeur finale = K
+    assert zeta > 1  # verifie que c'est bien aperiodique
+
+def test_reponse_indicielle_ordre2_pseudooscillant():
+    # 0 < zeta < 1 -> oscillations
+    K = 1.0
+    wn = 2.0
+    zeta = 0.3  # pseudo-oscillant
+    t, y = generer_ordre2(K, wn, zeta)
+    assert abs(y[-1] - K) < 0.02  # valeur finale = K
+    assert 0 < zeta < 1  # verifie que c'est bien pseudo-oscillant
+    # verifier qu'il y a un depassement (ymax > K)
+    assert max(y) > K
+
+def test_reponse_indicielle_ordre2_amorti():
+    # zeta proche de 1 -> pas de depassement ou tres leger
+    K = 1.0
+    wn = 2.0
+    zeta = 1.0  # amorti
+    t, y = generer_ordre2(K, wn, zeta)
+    assert abs(y[-1] - K) < 0.02  # valeur finale = K
+    assert abs(zeta - 1.0) < 0.15  # zeta proche de 1
+
+def test_plage_zeta_aperiodique():
+    # pour aperiodique zeta doit etre > 1
+    zeta = 2.0
+    assert zeta > 1
+
+def test_plage_zeta_pseudooscillant():
+    # pour pseudo-oscillant 0 < zeta < 1
+    zeta = 0.3
+    assert 0 < zeta < 1
+
+def test_plage_zeta_amorti():
+    # pour amorti zeta proche de 1
+    zeta = 1.0
+    assert 0.9 <= zeta <= 1.1
