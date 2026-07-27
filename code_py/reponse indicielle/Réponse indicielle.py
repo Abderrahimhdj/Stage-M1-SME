@@ -5,6 +5,7 @@ import base64					 # pour convertir l'image en texte
 import io 						 # pour manipuler l'image en memoire
 import random					 # pour les parametres aléatoires
 
+# ft ordre 1
 def generer_ordre1(K, tau):
     num = [K]
     den = [tau, 1]
@@ -13,11 +14,12 @@ def generer_ordre1(K, tau):
     t, y = signal.step(sys, T=t)
     return t, y
 
+# ft ordre 2
 def generer_ordre2(K, wn, zeta):
     num = [K * wn**2]
     den = [1, 2 * zeta * wn, wn**2]
     sys = signal.TransferFunction(num, den)
-    t_end = max(10 / wn, 20)
+    t_end = 10  # limite a 10 secondes
     t = np.linspace(0, t_end, 500)
     t, y = signal.step(sys, T=t)
     return t, y
@@ -52,18 +54,15 @@ types = [
 ]
 
 for i in range(3):
-    # choisir un type aleatoire
     choix_type = random.randint(0, 3)
 
     if choix_type == 0:
-        # ordre 1
         K = round(random.uniform(0.5, 2), 2)
         tau = round(random.uniform(1, 5), 2)
         t, y = generer_ordre1(K, tau)
         bonne = types[0]
 
     elif choix_type == 1:
-        # ordre 2 aperiodique zeta > 1
         K = round(random.uniform(0.5, 2), 2)
         wn = round(random.uniform(1, 4), 2)
         zeta = round(random.uniform(1.5, 3), 2)
@@ -71,7 +70,6 @@ for i in range(3):
         bonne = types[1]
 
     elif choix_type == 2:
-        # ordre 2 amorti zeta = 1 ou proche
         K = round(random.uniform(0.5, 2), 2)
         wn = round(random.uniform(1, 4), 2)
         zeta = round(random.uniform(0.9, 1.1), 2)
@@ -79,7 +77,6 @@ for i in range(3):
         bonne = types[2]
 
     else:
-        # ordre 2 pseudo-oscillant 0 < zeta < 1
         K = round(random.uniform(0.5, 2), 2)
         wn = round(random.uniform(1, 4), 2)
         zeta = round(random.uniform(0.1, 0.7), 2)
@@ -89,7 +86,6 @@ for i in range(3):
     img_base64 = image_to_base64(t, y)
     img_tag = '<img src="data:image/png;base64,' + img_base64 + '" width="400"/>'
 
-    # mauvaises reponses = les 3 autres types
     mauvaises = [t for t in types if t != bonne]
     choix = random.sample(mauvaises, 3)
 
