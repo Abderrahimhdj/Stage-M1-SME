@@ -9,7 +9,7 @@ total = 0
 #----------------------------------------------------------
 #               ordre 1
 #----------------------------------------------------------
-for i in range(1):
+for i in range(0):
     choix = random.randint(1, 2)
     if choix == 1:
         a = random.randint(1, 10)
@@ -38,7 +38,7 @@ for i in range(1):
 #----------------------------------------------------------
 #               ordre 2
 #----------------------------------------------------------
-for i in range(1):
+for i in range(0):
     choix = random.randint(1, 2)
     if choix == 1:
         a = random.randint(1, 10)
@@ -106,7 +106,7 @@ for i in range(1):
 #----------------------------------------------------------
 #               ordre 4
 #----------------------------------------------------------
-for i in range(1):
+for i in range(0):
     choix = random.randint(1, 2)
     if choix == 1:
         a = random.randint(1, 10)
